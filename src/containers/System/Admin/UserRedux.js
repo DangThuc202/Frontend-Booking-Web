@@ -87,6 +87,7 @@ class UserRedux extends Component {
       });
     }
   };
+
   handleSaveUser = () => {
     let isValid = this.checkValidateInput();
     if (isValid === false) return;
@@ -180,6 +181,7 @@ class UserRedux extends Component {
                   className="form-control"
                   type="email"
                   value={email}
+                  required
                   onChange={(event) => {
                     this.onChangeInput(event, "email");
                   }}
@@ -326,12 +328,14 @@ class UserRedux extends Component {
 
               <div className="col-12 my-3">
                 <button
+                  type="button"
                   className="btn btn-primary"
                   onClick={() => this.handleSaveUser()}
                 >
                   <FormattedMessage id="Lưu" />
                 </button>
               </div>
+
               <div className="col-12 mb-5">
                 <TableManage />
               </div>

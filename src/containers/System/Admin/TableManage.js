@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
+// import { deleteUserService } from "../../services/userService";
 import "./TableManage.scss";
 import * as actions from "../../../store/actions";
 
@@ -25,13 +26,22 @@ class TableManage extends Component {
     }
   }
 
-  handleDeleteUser = (user) => {
+  handleDeleteUser = async (user) => {
     this.props.deleteAUserRedux(user.id);
+    // try {
+    //   let res = await deleteUserService(user.id);
+    //   if (res && res.errCode === 0) {
+    //     // await this.getAllUser
+    //   } else {
+    //     alert(res.errMessage);
+    //   }
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   render() {
-    console.log("abc", this.props.listUsers);
-    let arrUsers = this.props.usersRedux;
+    let arrUsers = this.state.usersRedux;
     return (
       <table id="TableManageUser">
         <tr>
@@ -45,7 +55,7 @@ class TableManage extends Component {
           arrUsers.length > 0 &&
           arrUsers.map((item, index) => {
             return (
-              <tr>
+              <tr key={index}>
                 <td>{item.email}</td>
                 <td>{item.firstName}</td>
                 <td>{item.lastName}</td>
