@@ -18,14 +18,13 @@ const createNewUserService = (data) => {
 
 const deleteUserService = (userId) => {
   console.log(userId);
-  return (
-    axios.delete("/api/delete-user"),
-    {
-      data: {
-        id: userId,
-      },
-    }
-  );
+  return axios({
+    method: "DELETE",
+    url: "/api/delete-user",
+    data: {
+      id: userId,
+    },
+  });
 };
 
 export {

@@ -146,10 +146,12 @@ export const deleteAUser = (userId) => {
     try {
       let res = await deleteUserService(userId);
       if (res && res.errCode === 0) {
+        alert(`Xóa người dùng thành công`)
         toast.success("Xóa thành công !");
         dispatch(deleteUserSuccess());
         dispatch(fetchAllUsersStart());
-      } else {
+      }
+      else {
         toast.error("Xóa lỗi");
         dispatch(deleteUserFailed());
       }
