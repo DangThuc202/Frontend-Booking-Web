@@ -6,7 +6,7 @@ import {
   deleteUserService,
 } from "../../services/userService";
 import actionTypes from "./actionTypes";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 export const fetchGenderStart = () => {
   // type: actionTypes.FETCH_GENDER_START,
@@ -94,6 +94,9 @@ export const createNewUser = (data) => {
         toast.success("Thêm người dùng thành công !");
         dispatch(saveUserSuccess());
         dispatch(fetchAllUsersStart());
+      } else if (res && res.errCode === 1) {
+        alert("Bạn nhập không đúng định dạng email");
+        dispatch(saveUserFailed());
       } else {
         dispatch(saveUserFailed());
       }

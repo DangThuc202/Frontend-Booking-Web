@@ -7,15 +7,17 @@
     "@formatjs/intl-relativetimeformat": "^7.3.6",
     "@fortawesome/fontawesome-free-webfonts": "^1.0.9",
     "axios": "^0.21.1",
-    "bootstrap": "^4.6.0",
+    "bootstrap": "^4.6.2",
     "connected-react-router": "^6.9.1",
     "cors": "^2.8.5",
+    "formik": "^2.2.9",
     "lodash": "^4.17.21",
     "moment": "^2.29.0",
     "node-sass": "^6.0.0",
     "react": "^17.0.2",
     "react-auth-wrapper": "^1.0.0",
     "react-autosuggest": "^10.1.0",
+    "react-bootstrap": "^2.7.4",
     "react-bootstrap-table-next": "^4.0.3",
     "react-bootstrap-table2-filter": "^1.3.3",
     "react-custom-scrollbars": "^4.2.1",
@@ -37,7 +39,8 @@
     "redux-state-sync": "^2.1.0",
     "redux-thunk": "^2.3.0",
     "slick-carousel": "^1.8.1",
-    "typescript": "^4.3.2"
+    "typescript": "^4.3.2",
+    "validator": "^13.9.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -59,5 +62,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint-plugin-react-hooks": "^4.6.0"
   }
 }

@@ -76,7 +76,7 @@ class App extends Component {
               closeButton={<CustomToastCloseButton />}
             /> */}
 
-            <ToastContainer
+            {/* <ToastContainer
               position="right-bottom "
               autoClose={5000}
               hideProgressBar={false}
@@ -86,7 +86,7 @@ class App extends Component {
               pauseOnFocusLoss
               draggable
               pauseOnHover
-            />
+            /> */}
           </div>
         </Router>
       </Fragment>

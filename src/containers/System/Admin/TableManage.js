@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
-// import { deleteUserService } from "../../services/userService";
+import { getAllUsers, deleteUserService } from "../../../services/userService";
 import "./TableManage.scss";
 import * as actions from "../../../store/actions";
 
@@ -12,6 +12,11 @@ class TableManage extends Component {
       usersRedux: [],
     };
   }
+
+  // async componentDidMount() {
+  //   await this.getAllUsersFromReact();
+  //   this.props.fetchUserRedux();
+  // }
 
   componentDidMount() {
     this.props.fetchUserRedux();
@@ -26,18 +31,13 @@ class TableManage extends Component {
     }
   }
 
-  handleDeleteUser = async (user) => {
+  handleEdit = (user) => {
+    console.log("abc", user);
+  };
+
+  handleDeleteUser = (user) => {
     this.props.deleteAUserRedux(user.id);
-    // try {
-    //   let res = await deleteUserService(user.id);
-    //   if (res && res.errCode === 0) {
-    //     // await this.getAllUser
-    //   } else {
-    //     alert(res.errMessage);
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    console.log("abc", user);
   };
 
   render() {
@@ -61,7 +61,10 @@ class TableManage extends Component {
                 <td>{item.lastName}</td>
                 <td>{item.address}</td>
                 <td>
-                  <button className="btn-edit">
+                  <button
+                    onClick={() => this.handleEdit(item)}
+                    className="btn-edit"
+                  >
                     <i className="fas fa-pencil-alt"></i>
                   </button>
                   <button

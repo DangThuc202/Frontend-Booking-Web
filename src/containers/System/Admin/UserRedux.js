@@ -105,6 +105,11 @@ class UserRedux extends Component {
     });
   };
 
+  // checkValidationEmail = (inputText) => {
+  //   let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  //   i
+  // };
+
   checkValidateInput = () => {
     let isValid = true;
     let arrCheck = [
@@ -247,21 +252,6 @@ class UserRedux extends Component {
                   }}
                 />
               </div>
-
-              {/* <div className="col-3">
-                <label>Gender</label>
-                <select className="form-control">
-                  {genders &&
-                    genders.length > 0 &&
-                    genders.map((item, index) => {
-                      // return <option key={index}>{item.valueVi}</option>;
-                      return <option>Nam</option>;
-                    })}
-
-                  <option>...</option>
-                </select>
-              </div> */}
-
               <div className="col-3">
                 <label>Giới tính</label>
                 <select className="form-control">
@@ -331,6 +321,7 @@ class UserRedux extends Component {
                   type="button"
                   className="btn btn-primary"
                   onClick={() => this.handleSaveUser()}
+                  onChange={() => this.handleOnChange()}
                 >
                   <FormattedMessage id="Lưu" />
                 </button>

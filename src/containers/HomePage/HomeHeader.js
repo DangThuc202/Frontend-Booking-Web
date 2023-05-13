@@ -63,7 +63,9 @@ class HomeHeader extends Component {
               </div>
               <div className="option-child">
                 <div className="img-child b"></div>
-                <div className="text-child">Khám từ xa</div>
+                <div className="text-child">
+                  Khám <br /> từ xa
+                </div>
               </div>
               <div className="option-child">
                 <div className="img-child c"></div>
@@ -71,15 +73,40 @@ class HomeHeader extends Component {
               </div>
               <div className="option-child">
                 <div className="img-child d"></div>
-                <div className="text-child">Xét nghiệm y học</div>
+                <div className="text-child">
+                  Xét nghiệm <br />y học
+                </div>
               </div>
               <div className="option-child">
                 <div className="img-child e"></div>
-                <div className="text-child">Sức khỏe tinh thần</div>
+                <div className="text-child">
+                  Sức khỏe <br />
+                  tinh thần
+                </div>
               </div>
               <div className="option-child">
                 <div className="img-child f"></div>
                 <div className="text-child">Khám nha khoa</div>
+              </div>
+              <div className="option-child">
+                <div className="img-child g"></div>
+                <div className="text-child">
+                  Gói
+                  <br /> phẫu thuật
+                </div>
+              </div>
+              <div className="option-child">
+                <div className="img-child h"></div>
+                <div className="text-child">
+                  Sản phẩm <br />y tế
+                </div>
+              </div>
+              <div className="option-child">
+                <div className="img-child j"></div>
+                <div className="text-child">
+                  Bài test
+                  <br /> sức khỏe
+                </div>
               </div>
             </div>
           </div>
