@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
-import { getAllUsers, deleteUserService } from "../../../services/userService";
+import {
+  getAllUsers,
+  deleteUserService,
+  editUserService,
+} from "../../../services/userService";
 import "./TableManage.scss";
 import * as actions from "../../../store/actions";
 
@@ -31,13 +35,12 @@ class TableManage extends Component {
     }
   }
 
-  handleEdit = (user) => {
-    console.log("abc", user);
+  handleEditUser = (user) => {
+    this.props.handleEditUserFromParentKey(user);
   };
 
   handleDeleteUser = (user) => {
     this.props.deleteAUserRedux(user.id);
-    console.log("abc", user);
   };
 
   render() {
@@ -62,7 +65,7 @@ class TableManage extends Component {
                 <td>{item.address}</td>
                 <td>
                   <button
-                    onClick={() => this.handleEdit(item)}
+                    onClick={() => this.handleEditUser(item)}
                     className="btn-edit"
                   >
                     <i className="fas fa-pencil-alt"></i>

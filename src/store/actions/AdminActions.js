@@ -4,9 +4,10 @@ import {
   createNewUserService,
   getAllUsers,
   deleteUserService,
+  editUserService,
+  getTopDoctorHomeService,
 } from "../../services/userService";
 import actionTypes from "./actionTypes";
-import { toast, ToastContainer } from "react-toastify";
 
 export const fetchGenderStart = () => {
   // type: actionTypes.FETCH_GENDER_START,
@@ -91,7 +92,6 @@ export const createNewUser = (data) => {
     try {
       let res = await createNewUserService(data);
       if (res && res.errCode === 0) {
-        toast.success("Thêm người dùng thành công !");
         dispatch(saveUserSuccess());
         dispatch(fetchAllUsersStart());
       } else if (res && res.errCode === 1) {
@@ -122,11 +122,9 @@ export const fetchAllUsersStart = () => {
       if (res && res.errCode === 0) {
         dispatch(fetchAllUsersSuccess(res.users.reverse()));
       } else {
-        toast.error("error");
         dispatch(fetchAllUsersFailed());
       }
     } catch (error) {
-      toast.error("Lỗi");
       dispatch(fetchAllUsersFailed());
     }
   };
@@ -146,17 +144,14 @@ export const deleteAUser = (userId) => {
     try {
       let res = await deleteUserService(userId);
       if (res && res.errCode === 0) {
-        alert(`Xóa người dùng thành công`)
-        toast.success("Xóa thành công !");
+        alert(`Xóa người dùng thành công`);
+
         dispatch(deleteUserSuccess());
         dispatch(fetchAllUsersStart());
-      }
-      else {
-        toast.error("Xóa lỗi");
+      } else {
         dispatch(deleteUserFailed());
       }
     } catch (error) {
-      toast.error("Xóa lỗi");
       dispatch(deleteUserFailed());
     }
   };
@@ -169,3 +164,51 @@ export const deleteUserSuccess = () => ({
 export const deleteUserFailed = () => ({
   type: actionTypes.DELETE_USER_FAILED,
 });
+
+export const editAUser = (data) => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await editUserService(data);
+      if (res && res.errCode === 0) {
+        alert(`Xóa người dùng thành công`);
+        dispatch(editUserSuccess());
+        dispatch(fetchAllUsersStart());
+      } else {
+        dispatch(editUserFailed());
+      }
+    } catch (error) {
+      dispatch(editUserFailed());
+    }
+  };
+};
+
+export const editUserSuccess = () => ({
+  type: actionTypes.EDIT_USER_SUCCESS,
+});
+
+export const editUserFailed = () => ({
+  type: actionTypes.EDIT_USER_FAILED,
+});
+
+export const fetchTopDocTor = () => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await getTopDoctorHomeService();
+      if (res && res.errCode === 0) {
+        dispatch({
+          type: actionTypes.FETCH_TOP_DOCTORS_SUCCESS,
+          dataDoctors: res.data,
+        });
+      } else {
+        dispatch({
+          type: actionTypes.FETCH_TOP_DOCTORS_FAILED,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      dispatch({
+        type: actionTypes.FETCH_TOP_DOCTORS_FAILED,
+      });
+    }
+  };
+};
