@@ -13,6 +13,7 @@ const getAllCodeService = (inputType) => {
 };
 
 const createNewUserService = (data) => {
+  console.log(data);
   return axios.post("/api/create-new-user", data);
 };
 

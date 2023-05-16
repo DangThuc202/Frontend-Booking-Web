@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import Slider from "react-slick";
-import * as actons from "../../../store/actions";
+import * as actions from "../../../store/actions";
 
-class Specialty extends Component {
+class OutStandingDoctor extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -12,17 +12,17 @@ class Specialty extends Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.props.loadTopDoctor();
-  }
+  };
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  componentDidUpdate = (prevProps, prevState, snapshot) => {
     if (prevProps.topDoctorsRedux !== this.props.topDoctorsRedux) {
       this.setState({
         arrDoctors: this.props.topDoctorsRedux,
       });
     }
-  }
+  };
 
   render() {
     let arrDoctors = this.state.arrDoctors;
@@ -31,12 +31,12 @@ class Specialty extends Component {
       <div className="section-share section-outstanding-doctor">
         <div className="section-container">
           <div className="section-header">
-            <span className="title-section"> Bác sĩ nổi bật tuần qua</span>
+            <span className="title-section"> Bác sĩ nổi bật</span>
             <button className="btn-section">Xem thêm</button>
           </div>
           <div className="section-body">
             <Slider {...this.props.settings}>
-              {arrDoctors &&
+              {arguments &&
                 arrDoctors.length > 0 &&
                 arrDoctors.map((item, index) => {
                   let imageBase64 = "";
@@ -53,9 +53,9 @@ class Specialty extends Component {
                             className="bg-img section-outstanding-doctor"
                             style={{ backgroundImage: `url(${imageBase64})` }}
                           ></div>
-                          <div className="position text-center">
-                            <div> Cơ xương khớp</div>
-                          </div>
+                        </div>
+                        <div className="position text-center">
+                          <div> Cơ xương khớp</div>
                         </div>
                       </div>
                     </div>
@@ -78,8 +78,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loadTopDoctor: () => dispatch(actons.fetchTopDocTor()),
+    loadTopDoctor: () => dispatch(actions.fetchTopDocTor()),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Specialty);
+export default connect(mapStateToProps, mapDispatchToProps)(OutStandingDoctor);

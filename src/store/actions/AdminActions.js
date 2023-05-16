@@ -170,7 +170,6 @@ export const editAUser = (data) => {
     try {
       let res = await editUserService(data);
       if (res && res.errCode === 0) {
-        alert(`Xóa người dùng thành công`);
         dispatch(editUserSuccess());
         dispatch(fetchAllUsersStart());
       } else {

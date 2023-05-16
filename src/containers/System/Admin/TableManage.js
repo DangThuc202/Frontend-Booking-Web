@@ -17,11 +17,6 @@ class TableManage extends Component {
     };
   }
 
-  // async componentDidMount() {
-  //   await this.getAllUsersFromReact();
-  //   this.props.fetchUserRedux();
-  // }
-
   componentDidMount() {
     this.props.fetchUserRedux();
   }

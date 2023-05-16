@@ -127,10 +127,10 @@ class UserRedux extends Component {
         phonenumber: this.state.phonenumber,
         gender: this.state.gender,
         roleId: this.state.role,
-        avatar: this.state.avatar,
         positionId: this.state.position,
+        avatar: this.state.avatar,
       });
-      alert("Sứa thông tin người dùng thành công !");
+      alert("Cập nhật người dùng thành công !");
     }
   };
 
