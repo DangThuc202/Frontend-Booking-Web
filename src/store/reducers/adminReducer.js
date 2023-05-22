@@ -13,13 +13,13 @@ const initialState = {
 const adminReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.FETCH_GENDER_START:
-      let copyState = { ...state };
-      copyState.isLoadingGender = true;
+      state.isLoadingGender = true;
       return {
-        ...copyState,
+        ...state,
       };
     case actionTypes.FETCH_GENDER_SUCCESS:
       state.genders = action.data;
+      console.log("check", action.data);
       state.isLoadingGender = false;
       return {
         ...state,
@@ -34,7 +34,7 @@ const adminReducer = (state = initialState, action) => {
     case actionTypes.FETCH_POSITION_SUCCESS:
       state.positions = action.data;
       return {
-        ...copyState,
+        ...state,
       };
     case actionTypes.FETCH_POSITION_FAILED:
       state.positions = [];

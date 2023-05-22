@@ -11,11 +11,10 @@ import {
 import actionTypes from "./actionTypes";
 
 export const fetchGenderStart = () => {
-  // type: actionTypes.FETCH_GENDER_START,
   return async (dispatch, getState) => {
     try {
       dispatch({ type: actionTypes.FETCH_GENDER_START });
-      let res = await getAllCodeService("GENDER");
+      let res = await getAllCodeService("gender");
       if (res && res.errCode === 0) {
         dispatch(fetchGenderSuccess(res.data));
       } else {
@@ -83,7 +82,6 @@ export const fetchRoleStart = () => {
       }
     } catch (error) {
       dispatch(fetchRoleFailed());
-      console.log(error);
     }
   };
 };
@@ -231,6 +229,29 @@ export const fetchAllDoctors = () => {
       console.log(error);
       dispatch({
         type: actionTypes.FETCH_ALL_DOCTORS_FAILED,
+      });
+    }
+  };
+};
+
+export const fetchAllScheduleTime = () => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await getAllCodeService("TIME");
+      if (res && res.errCode === 0) {
+        dispatch({
+          type: actionTypes.FETCH_ALLCODE_SCHEDULE_TIME_SUCCESS,
+          dataTime: res.data,
+        });
+      } else {
+        dispatch({
+          type: actionTypes.FETCH_ALLCODE_SCHEDULE_TIME_FAILED,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      dispatch({
+        type: actionTypes.FETCH_ALLCODE_SCHEDULE_TIME_FAILED,
       });
     }
   };

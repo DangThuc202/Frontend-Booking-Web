@@ -7,6 +7,7 @@ import "./UserRedux.scss";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
 import TableManage from "./TableManage";
+// import { getAllCodeService } from "../../../services/userService";
 
 class UserRedux extends Component {
   constructor(props) {
@@ -38,6 +39,16 @@ class UserRedux extends Component {
     this.props.getGenderStart();
     this.props.getPositionStart();
     this.props.getRoleStart();
+    // try {
+    //   let res = await getAllCodeService("gender");
+    //   if (res && res.errCode == 0) {
+    //     this.setState({
+    //       genderArr: res.data,
+    //     });
+    //   }
+    // } catch (error) {
+    //   console.log(error);
+    // }
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -195,8 +206,11 @@ class UserRedux extends Component {
   };
 
   render() {
+    console.log("thuc3", this.state);
     let isSetGenders = this.state.isLoadingGender;
-
+    let genders = this.state.genderArr;
+    let roles = this.state.roleArr;
+    let positions = this.state.positionArr;
     let {
       email,
       password,
@@ -299,24 +313,28 @@ class UserRedux extends Component {
                 />
               </div>
               <div className="col-3">
-                <label>Giới tính</label>
+                <FormattedMessage id="manage-user.gender" />
                 <select className="form-control">
                   value={gender}; onChange=
                   {(event) => {
                     this.onChangeInput(event, "gender");
                   }}
                   <option selected>Chọn ...</option>
-                  <option>Nam</option>
-                  <option>Nữ</option>
-                  <option>Khác</option>
+                  {genders &&
+                    genders.length > 0 &&
+                    genders.map((item, index) => {
+                      return <option key={index}>{item.valueVi}</option>;
+                    })}
                 </select>
               </div>
 
               <div className="col-3">
-                <label>Chức danh</label>
+                <FormattedMessage id="manage-user.position" />
                 <select className="form-control">
                   <option selected>Chọn ...</option>
-                  <option>Bác sĩ</option>
+                  <div onClick={() => this.abc()}>
+                    <option>Bác sĩ</option>
+                  </div>
                   <option>Thạc sĩ</option>
                   <option>Tiến sĩ</option>
                   <option>Giáo sư</option>
@@ -325,12 +343,16 @@ class UserRedux extends Component {
               </div>
 
               <div className="col-3">
-                <label>Vai trò</label>
+                <label>
+                  <FormattedMessage id="manage-user.role" />
+                </label>
                 <select className="form-control">
                   <option selected>Chọn ...</option>
-                  <option>Quản trị viên</option>
-                  <option>Bác sĩ</option>
-                  <option>Bệnh nhân</option>
+                  {roles &&
+                    roles.length > 0 &&
+                    roles.map((item, index) => {
+                      return <option key={index}>{item.valueVi}</option>;
+                    })}
                 </select>
               </div>
 
