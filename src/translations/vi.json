@@ -32,13 +32,16 @@
         "header": "Quản trị hệ thống",
         "user-manage": "Quản lý người sử dụng",
         "product-manage": "Quản lý gói",
-        "register-package-group-or-account": "Đăng ký gói dịch vụ cho nhóm/tài khoản"
+        "register-package-group-or-ac count": "Đăng ký gói dịch vụ cho nhóm/tài khoản"
       },
       "system-parameter": {
         "header": "Tham số hệ thống"
       }
     },
 
+    "doctor": {
+      "manage-schedule": "Quản lý đặt lịch"
+    },
     "admin": {
       "manage-user": "Người dùng",
       "manage-doctor": "Quản lý bác sĩ",
@@ -52,5 +55,10 @@
       "handbook": "Cẩm nang",
       "manage-handbook": "Quản lý cẩm nang"
     }
+  },
+  "manage-user": {
+    "role": "Vai trò",
+    "position": "Chức danh",
+    "gender": "Giới tính"
   }
 }

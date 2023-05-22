@@ -9,11 +9,10 @@ const getAllUsers = (inputId) => {
 };
 
 const getAllCodeService = (inputType) => {
-  return axios.get(`/api/allcode?type=${inputType}`);
+  return axios.get(`/api/get/allcode?type=${inputType}`);
 };
 
 const createNewUserService = (data) => {
-  console.log(data);
   return axios.post("/api/create-new-user", data);
 };
 
@@ -36,7 +35,7 @@ const getTopDoctorHomeService = (limit) => {
 };
 
 const getAllDoctors = () => {
-  return axios.get(`/api/get-all-doctor`);
+  return axios.get(`/api/get-all-doctors`);
 };
 
 export {
