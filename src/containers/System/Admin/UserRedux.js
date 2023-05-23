@@ -7,7 +7,6 @@ import "./UserRedux.scss";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
 import TableManage from "./TableManage";
-// import { getAllCodeService } from "../../../services/userService";
 
 class UserRedux extends Component {
   constructor(props) {
@@ -39,16 +38,6 @@ class UserRedux extends Component {
     this.props.getGenderStart();
     this.props.getPositionStart();
     this.props.getRoleStart();
-    // try {
-    //   let res = await getAllCodeService("gender");
-    //   if (res && res.errCode == 0) {
-    //     this.setState({
-    //       genderArr: res.data,
-    //     });
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    // }
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -226,7 +215,7 @@ class UserRedux extends Component {
 
     return (
       <div className="user-redux-container">
-        <div className="title">User Redux</div>
+        <div className="title">Tạo thông tin bác sĩ</div>
         <div className="user-redux-body">
           <div className="container">
             <div className="row">
@@ -311,77 +300,6 @@ class UserRedux extends Component {
                     this.onChangeInput(event, "address");
                   }}
                 />
-              </div>
-              <div className="col-3">
-                <FormattedMessage id="manage-user.gender" />
-                <select className="form-control">
-                  value={gender}; onChange=
-                  {(event) => {
-                    this.onChangeInput(event, "gender");
-                  }}
-                  <option selected>Chọn ...</option>
-                  {genders &&
-                    genders.length > 0 &&
-                    genders.map((item, index) => {
-                      return <option key={index}>{item.valueVi}</option>;
-                    })}
-                </select>
-              </div>
-
-              <div className="col-3">
-                <FormattedMessage id="manage-user.position" />
-                <select className="form-control">
-                  <option selected>Chọn ...</option>
-                  <div onClick={() => this.abc()}>
-                    <option>Bác sĩ</option>
-                  </div>
-                  <option>Thạc sĩ</option>
-                  <option>Tiến sĩ</option>
-                  <option>Giáo sư</option>
-                  <option>Phó giáo sư</option>
-                </select>
-              </div>
-
-              <div className="col-3">
-                <label>
-                  <FormattedMessage id="manage-user.role" />
-                </label>
-                <select className="form-control">
-                  <option selected>Chọn ...</option>
-                  {roles &&
-                    roles.length > 0 &&
-                    roles.map((item, index) => {
-                      return <option key={index}>{item.valueVi}</option>;
-                    })}
-                </select>
-              </div>
-
-              <div className="col-3">
-                {/* <label>Image</label>
-                <input className="form-control" type="text" /> */}
-                <label>
-                  {" "}
-                  <FormattedMessage id="Ảnh đại diện" />{" "}
-                </label>
-                <div className="preview-img-container">
-                  <input
-                    id="previewImg"
-                    type="file"
-                    hidden
-                    onChange={(event) => this.handleOnchangeImage(event)}
-                  />
-                  <label className="label-upload" htmlFor="previewImg">
-                    Tải ảnh
-                    <i className="fas fa-upload mx-2"></i>
-                  </label>
-                  <div
-                    className="preview-image"
-                    style={{
-                      backgroundImage: `url(${this.state.previewImgURL})`,
-                    }}
-                    onClick={() => this.openPreviewImage()}
-                  ></div>
-                </div>
               </div>
 
               <div className="col-12 my-3">

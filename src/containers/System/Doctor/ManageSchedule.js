@@ -6,7 +6,14 @@ import * as actions from "../../../store/actions";
 import CRUD_ACTIONS from "../../../utils";
 import DatePicker from "../../../components/Input/DatePicker";
 import moment from "moment";
-import { Select } from "react-select/dist/Select-fd7cb895.cjs.prod";
+// import { Select } from "react-select/dist/Select-fd7cb895.cjs.prod";
+import Select from "react-select";
+
+const options = [
+  { value: "chocolate", label: "Chocolate" },
+  { value: "strawberry", label: "Strawberry" },
+  { value: "vanilla", label: "Vanilla" },
+];
 
 class ManageSchedule extends Component {
   constructor(props) {
@@ -26,9 +33,9 @@ class ManageSchedule extends Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.allDoctors !== this.props.allDoctors) {
-      // let dataSelect = this.buildDataInputSelect(this.props.allDoctors);
+      let dataSelect = this.buildDataInputSelect(this.props.allDoctors);
       this.setState({
-        listDoctors: this.props.allDoctors,
+        listDoctors: dataSelect,
       });
     }
     if (prevProps.allScheduleTime !== this.props.allScheduleTime) {
@@ -37,6 +44,20 @@ class ManageSchedule extends Component {
       });
     }
   }
+
+  buildDataInputSelect = (inputData) => {
+    let result = [];
+    if (inputData && inputData.length > 0) {
+      inputData.map((item, index) => {
+        let object = {};
+        let labelVi = `${item.firstName} ${item.lastName}`;
+        object.label = labelVi;
+        object.value = item.id;
+        result.push(object);
+      });
+    }
+    return result;
+  };
 
   handleChangSelect = async (selectedOption) => {
     this.setState({ selectedDoctor: selectedOption });
@@ -49,7 +70,8 @@ class ManageSchedule extends Component {
   };
 
   render() {
-    let rangeTime = this.state;
+    let { rangeTime } = this.state;
+    console.log("rangetime", rangeTime);
     return (
       <div className="manage-schedule-container">
         <div className="m-s-title">
@@ -80,7 +102,7 @@ class ManageSchedule extends Component {
                 rangeTime.map((item, index) => {
                   return (
                     <button className="btn btn-schedule" key={index}>
-                      {this.props}
+                      {item.valueEn}
                     </button>
                   );
                 })}
