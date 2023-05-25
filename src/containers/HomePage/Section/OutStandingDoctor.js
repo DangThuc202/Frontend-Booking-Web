@@ -3,9 +3,32 @@ import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import Slider from "react-slick";
 import "./OutstandingDoctor.scss";
+import * as actions from "../../../store/actions";
 
 class OutstandingDoctor extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      arrDoctors: [],
+    };
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.topDoctorsRedux !== this.props.topDoctorsRedux) {
+      this.setState({
+        arrDoctors: this.props.topDoctorsRedux,
+      });
+    }
+  }
+
+  componentDidMount() {
+    this.props.loadTopDoctors();
+  }
+
   render() {
+    console.log("check", this.props.topDoctorsRedux);
+    let arrDoctors = this.state.arrDoctors;
+    arrDoctors = arrDoctors.concat(arrDoctors).concat(arrDoctors);
     return (
       <div className="section-share section-outstanding-doctor">
         <div className="section-container">
@@ -15,83 +38,27 @@ class OutstandingDoctor extends Component {
           </div>
           <div className="section-body">
             <Slider {...this.props.settings}>
-              <div className="section-customize">
-                <div className="customize-border">
-                  <div className="outer-bg">
-                    <div className="bg-img section-outstanding-doctor img1"></div>
-                  </div>
-                  <div className="position text-center">
-                    <div> Giáo Sư: Lê Hiếu Nghĩa</div>
-                    <div> Cơ xương khớp</div>
-                  </div>
-                </div>
-              </div>
-              <div className="section-customize">
-                <div className="customize-border">
-                  <div className="outer-bg">
-                    <div className="bg-img section-outstanding-doctor img2"></div>
-                  </div>
-                  <div className="position text-center">
-                    <div> Giáo Sư: Đặng Hoàng Thức</div>
-                    <div> Thần kinh</div>
-                  </div>
-                </div>
-              </div>
-              <div className="section-customize">
-                <div className="customize-border">
-                  <div className="outer-bg">
-                    <div className="bg-img section-outstanding-doctor img3"></div>
-                  </div>
-                  <div className="position text-center">
-                    <div> Giáo Sư: Tô Thanh Quí</div>
-                    <div> Tiêu hóa</div>
-                  </div>
-                </div>
-              </div>
-              <div className="section-customize">
-                <div className="customize-border">
-                  <div className="outer-bg">
-                    <div className="bg-img section-outstanding-doctor img4"></div>
-                  </div>
-                  <div className="position text-center">
-                    <div> Giáo Sư: Dương Minh Quân</div>
-                    <div> Tim mạch</div>
-                  </div>
-                </div>
-              </div>
-              <div className="section-customize">
-                <div className="customize-border">
-                  <div className="outer-bg">
-                    <div className="bg-img section-outstanding-doctor img5"></div>
-                  </div>
-                  <div className="position text-center">
-                    <div> Giáo Sư: Nguyễn Hiền Thiện</div>
-                    <div> Khoa nhi</div>
-                  </div>
-                </div>
-              </div>
-              <div className="section-customize">
-                <div className="customize-border">
-                  <div className="outer-bg">
-                    <div className="bg-img section-outstanding-doctor img6"></div>
-                  </div>
-                  <div className="position text-center">
-                    <div> Giáo Sư: Phan Văn Trung</div>
-                    <div> Tai mũi họng</div>
-                  </div>
-                </div>
-              </div>
-              <div className="section-customize">
-                <div className="customize-border">
-                  <div className="outer-bg">
-                    <div className="bg-img section-outstanding-doctor"></div>
-                  </div>
-                  <div className="position text-center">
-                    <div> Giáo Sư: Nguyễn Văn A</div>
-                    <div> Cơ xương khớp 7</div>
-                  </div>
-                </div>
-              </div>
+              {arrDoctors &&
+                arrDoctors.length > 0 &&
+                arrDoctors.map((item, index) => {
+                  let nameVi = `${item.lastName} ${item.firstName}`;
+                  return (
+                    <div className="section-customize" key={index}>
+                      <div className="customize-border">
+                        <div className="outer-bg">
+                          <div
+                            className="bg-img section-outstanding-doctor"
+                            // style={{ backgroundImage: `url(${imageBase64})` }}
+                          ></div>
+                        </div>
+                        <div className="position text-center">
+                          <div>Giáo sư: {nameVi}</div>
+                          <div>Cơ xương khớp</div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
             </Slider>
           </div>
         </div>
@@ -103,11 +70,14 @@ class OutstandingDoctor extends Component {
 const mapStateToProps = (state) => {
   return {
     isLoggedIn: state.user.isLoggedIn,
+    topDoctorsRedux: state.admin.topDoctors,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    loadTopDoctors: () => dispatch(actions.fetchTopDocTor()),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(OutstandingDoctor);

@@ -45,14 +45,14 @@ class UserRedux extends Component {
       let arrGender = this.props.genderRedux;
       this.setState({
         genderArr: arrGender,
-        gender: arrGender && arrGender.length > 0 ? arrGender[0].key : "",
+        gender: arrGender && arrGender.length > 0 ? arrGender[0].keyMap : "",
       });
     }
     if (prevProps.roleRedux !== this.props.roleRedux) {
       let arrRole = this.props.roleRedux;
       this.setState({
         roleArr: arrRole,
-        role: arrRole && arrRole.length > 0 ? arrRole[0].key : "",
+        role: arrRole && arrRole.length > 0 ? arrRole[0].keyMap : "",
       });
     }
     if (prevProps.positionRedux !== this.props.positionRedux) {
@@ -60,7 +60,7 @@ class UserRedux extends Component {
       this.setState({
         positionArr: arrPosition,
         position:
-          arrPosition && arrPosition.length > 0 ? arrPosition[0].key : "",
+          arrPosition && arrPosition.length > 0 ? arrPosition[0].keyMap : "",
       });
     }
 
@@ -74,7 +74,6 @@ class UserRedux extends Component {
         address: "",
         gender: "",
         position: "",
-        role: "",
         avatar: "",
         action: CRUD_ACTIONS.CREATE,
         previewImgURL: "",
@@ -311,7 +310,7 @@ class UserRedux extends Component {
                   }
                   type="button"
                   onClick={() => this.handleSaveUser()}
-                  // onChange={() => this.handleOnChange()}
+                  onKeyDown={(event) => this.handleKeyDown(event)}
                 >
                   {this.state.action === CRUD_ACTIONS.EDIT ? (
                     <FormattedMessage id="Cập nhật" />

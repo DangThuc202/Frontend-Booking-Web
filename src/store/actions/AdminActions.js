@@ -191,7 +191,8 @@ export const editUserFailed = () => ({
 export const fetchTopDocTor = () => {
   return async (dispatch, getState) => {
     try {
-      let res = await getTopDoctorHomeService();
+      let res = await getTopDoctorHomeService("3");
+      console.log("check2", res);
       if (res && res.errCode === 0) {
         dispatch({
           type: actionTypes.FETCH_TOP_DOCTORS_SUCCESS,
@@ -243,6 +244,7 @@ export const fetchAllScheduleTime = () => {
           type: actionTypes.FETCH_ALLCODE_SCHEDULE_TIME_SUCCESS,
           dataTime: res.data,
         });
+        console.log("check date time: ", res.data);
       } else {
         dispatch({
           type: actionTypes.FETCH_ALLCODE_SCHEDULE_TIME_FAILED,
