@@ -1,12 +1,19 @@
 import React, { Component } from "react";
-import { FormattedMessage } from "react-intl";
+import { FormattedDate, FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import "./ManageSchedule.scss";
 import * as actions from "../../../store/actions";
-import CRUD_ACTIONS from "../../../utils";
+import { CRUD_ACTIONS, dateFormat } from "../../../utils";
 import DatePicker from "../../../components/Input/DatePicker";
 import moment from "moment";
-import { Select } from "react-select/dist/Select-fd7cb895.cjs.prod";
+import _ from "lodash";
+import Select from "react-select";
+
+const options = [
+  { value: "chocolate", label: "Chocolate" },
+  { value: "strawberry", label: "Strawberry" },
+  { value: "vanilla", label: "Vanilla" },
+];
 
 class ManageSchedule extends Component {
   constructor(props) {
@@ -26,17 +33,35 @@ class ManageSchedule extends Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.allDoctors !== this.props.allDoctors) {
-      // let dataSelect = this.buildDataInputSelect(this.props.allDoctors);
+      let dataSelect = this.buildDataInputSelect(this.props.allDoctors);
       this.setState({
-        listDoctors: this.props.allDoctors,
+        listDoctors: dataSelect,
       });
     }
     if (prevProps.allScheduleTime !== this.props.allScheduleTime) {
+      let data = this.props.allScheduleTime;
+      if (data && data.length > 0) {
+        data = data.map((item) => ({ ...item, isSeclected: false }));
+      }
       this.setState({
-        rangeTime: this.props.allScheduleTime,
+        rangeTime: data,
       });
     }
   }
+
+  buildDataInputSelect = (inputData) => {
+    let result = [];
+    if (inputData && inputData.length > 0) {
+      inputData.map((item, index) => {
+        let object = {};
+        let labelVi = `${item.firstName} ${item.lastName}`;
+        object.label = labelVi;
+        object.value = item.id;
+        result.push(object);
+      });
+    }
+    return result;
+  };
 
   handleChangSelect = async (selectedOption) => {
     this.setState({ selectedDoctor: selectedOption });
@@ -48,8 +73,42 @@ class ManageSchedule extends Component {
     });
   };
 
+  handleClickBtnTime = (time) => {
+    let { rangeTime } = this.state;
+    if (rangeTime && rangeTime.length > 0) {
+      rangeTime = rangeTime.map((item) => {
+        if (item.id === time.id) item.isSeclected = !item.isSeclected;
+        return item;
+      });
+      this.setState({
+        rangeTime: rangeTime,
+      });
+    }
+  };
+
+  handleSaveSchedule = () => {
+    let { rangeTime, selectedDoctor, currentDate } = this.state;
+    let result = [];
+
+    if (rangeTime && rangeTime.length > 0) {
+      let selectedTime = rangeTime.filter((item) => item.isSeclected === true);
+      if (selectedTime && selectedTime.length > 0) {
+        selectedTime.map((schedule, index) => {
+          let object = {};
+          object.doctorId = selectedDoctor.value;
+          object.data = FormattedDate;
+          object.time = schedule.keyMap;
+          result.push(object);
+        });
+      } else {
+        return;
+      }
+    }
+  };
+
   render() {
-    let rangeTime = this.state;
+    let { rangeTime } = this.state;
+    console.log("rangetime", rangeTime);
     return (
       <div className="manage-schedule-container">
         <div className="m-s-title">
@@ -79,14 +138,27 @@ class ManageSchedule extends Component {
                 rangeTime.length > 0 &&
                 rangeTime.map((item, index) => {
                   return (
-                    <button className="btn btn-schedule" key={index}>
-                      {this.props}
+                    <button
+                      className={
+                        item.isSeclected === true
+                          ? "btn btn-schedule active"
+                          : "btn btn-schedule"
+                      }
+                      key={index}
+                      onClick={() => this.handleClickBtnTime(item)}
+                    >
+                      {item.valueEn}
                     </button>
                   );
                 })}
             </div>
             <div className="col-12">
-              <button className="btn btn-primary btn-save-schedule">Lưu</button>
+              <button
+                className="btn btn-primary btn-save-schedule"
+                onClick={() => this.handleSaveSchedule()}
+              >
+                Lưu
+              </button>
             </div>
           </div>
         </div>
