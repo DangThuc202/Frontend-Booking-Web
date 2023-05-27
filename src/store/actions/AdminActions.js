@@ -7,6 +7,7 @@ import {
   editUserService,
   getTopDoctorHomeService,
   getAllDoctors,
+  saveDetailDoctorService,
 } from "../../services/userService";
 import actionTypes from "./actionTypes";
 
@@ -191,7 +192,7 @@ export const editUserFailed = () => ({
 export const fetchTopDocTor = () => {
   return async (dispatch, getState) => {
     try {
-      let res = await getTopDoctorHomeService("3");
+      let res = await getTopDoctorHomeService("10");
       console.log("check2", res);
       if (res && res.errCode === 0) {
         dispatch({
@@ -230,6 +231,29 @@ export const fetchAllDoctors = () => {
       console.log(error);
       dispatch({
         type: actionTypes.FETCH_ALL_DOCTORS_FAILED,
+      });
+    }
+  };
+};
+
+export const saveDetailDoctor = (data) => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await saveDetailDoctorService(data);
+      if (res && res.errCode === 0) {
+        dispatch({
+          type: actionTypes.SAVE_DETAIL_DOCTOR_SUCCESS,
+        });
+        alert("Lưu thành công !");
+      } else {
+        dispatch({
+          type: actionTypes.SAVE_DETAIL_DOCTOR_FAILED,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      dispatch({
+        type: actionTypes.SAVE_DETAIL_DOCTOR_FAILED,
       });
     }
   };

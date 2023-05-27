@@ -8,12 +8,7 @@ import DatePicker from "../../../components/Input/DatePicker";
 import moment from "moment";
 import _ from "lodash";
 import Select from "react-select";
-
-const options = [
-  { value: "chocolate", label: "Chocolate" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
+import { saveBulkScheduleDoctor } from "../../../services/userService";
 
 class ManageSchedule extends Component {
   constructor(props) {
@@ -86,10 +81,10 @@ class ManageSchedule extends Component {
     }
   };
 
-  handleSaveSchedule = () => {
+  handleSaveSchedule = async () => {
     let { rangeTime, selectedDoctor, currentDate } = this.state;
     let result = [];
-
+    let formatedDate = new Date(currentDate).getTime();
     if (rangeTime && rangeTime.length > 0) {
       let selectedTime = rangeTime.filter((item) => item.isSeclected === true);
       if (selectedTime && selectedTime.length > 0) {
@@ -97,13 +92,19 @@ class ManageSchedule extends Component {
           let object = {};
           object.doctorId = selectedDoctor.value;
           object.data = FormattedDate;
-          object.time = schedule.keyMap;
+          object.timeType = schedule.keyMap;
           result.push(object);
         });
       } else {
         return;
       }
     }
+
+    let res = await saveBulkScheduleDoctor({
+      arrSchedule: result,
+      doctorId: selectedDoctor.value,
+      formatedDate: formatedDate,
+    });
   };
 
   render() {

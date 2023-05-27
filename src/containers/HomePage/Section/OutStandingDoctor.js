@@ -41,7 +41,7 @@ class OutstandingDoctor extends Component {
               {arrDoctors &&
                 arrDoctors.length > 0 &&
                 arrDoctors.map((item, index) => {
-                  let nameVi = `${item.lastName} ${item.firstName}`;
+                  let nameVi = `${item.firstName} ${item.lastName}`;
                   return (
                     <div className="section-customize" key={index}>
                       <div className="customize-border">
