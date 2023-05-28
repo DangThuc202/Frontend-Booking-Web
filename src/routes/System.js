@@ -28,18 +28,6 @@ class System extends Component {
           </div>
         </div>
       </React.Fragment>
-
-      //
-      //     <div className='system-container'>
-      //         <div className='system-list'>
-      //             <Switch>
-      //                 <Route path='system/user-manager' component={(UserManage)} />
-      //                 <Route path='system/user-reduxr' component={(UserRedux)} />
-      //                 <Route component = {() => return(< Redirect to ={systemMenuPath}/>)} />
-      //             </Switch>
-      //         </div>
-      //     </div>
-      //
     );
   }
 }
