@@ -13,10 +13,10 @@ export const adminMenu = [
         link: "/system/user-redux",
       },
 
-      // {
-      //   name: "menu.admin.manage-doctor",
-      //   link: "/system/manage-doctor",
-      // },
+      {
+        name: "menu.admin.manage-doctor",
+        link: "/system/manage-doctor",
+      },
 
       {
         name: "menu.admin.manage-admin",

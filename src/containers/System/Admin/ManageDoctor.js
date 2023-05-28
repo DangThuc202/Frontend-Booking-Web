@@ -9,12 +9,6 @@ import "react-markdown-editor-lite/lib/index.css";
 import "./ManageDoctor.scss";
 import Select from "react-select";
 
-const options = [
-  { value: "Thuc", label: "Thuc" },
-  { value: "Nghia", label: "Nghia" },
-  { value: "Qui", label: "Qui" },
-];
-
 const mdParser = new MarkdownIt();
 
 class ManageDoctor extends Component {
@@ -25,6 +19,7 @@ class ManageDoctor extends Component {
       contentHTML: "",
       selectedOption: "",
       description: "",
+      listDoctors: [],
     };
   }
 
@@ -32,7 +27,28 @@ class ManageDoctor extends Component {
     this.props.fetchAllDoctors();
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {}
+  buildDataInput = (inputData) => {
+    let result = [];
+    let object = {};
+    if (inputData && inputData.length > 0) {
+      inputData.map((item, index) => {
+        let object = {};
+        object.label = `${item.firstName} ${item.lastName}`;
+        object.value = item.id;
+        result.push(object);
+      });
+    }
+    return result;
+  };
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.allDoctors !== this.props.allDoctors) {
+      let dataSelect = this.buildDataInput(this.props.allDoctors);
+      this.setState({
+        listDoctors: dataSelect,
+      });
+    }
+  }
 
   handleEditorChange = ({ html, text }) => {
     this.setState({
@@ -72,7 +88,7 @@ class ManageDoctor extends Component {
             <Select
               value={this.state.selectedOption}
               onChange={this.handleChange}
-              options={options}
+              options={this.state.listDoctors}
             />
           </div>
           <div className="content-right">
@@ -97,7 +113,7 @@ class ManageDoctor extends Component {
         </div>
         <button
           onClick={() => this.handleSaveContentMarkdown()}
-          className="save-content-doctor"
+          className="save-content-doctor mt-5 mb-3 btn-primary "
         >
           Lưu thông tin
         </button>
@@ -115,7 +131,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchAllDoctors: () => dispatch(actions.fetchAllDoctors()),
-    saveDetailDoctorService: (data) => dispatch(actions.saveDetailDoctor(data)),
+    saveDetailDoctor: (data) => dispatch(actions.saveDetailDoctor(data)),
   };
 };
 

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import HomeHeader from "../../HomePage/HomeHeader";
 import "./DetailDoctor.scss";
-import { getDetailÌnorDoctor } from "../../../services/userService";
+import { saveDetailDoctorService } from "../../../services/userService";
 
 class DetailDoctor extends Component {
   constructor(props) {
@@ -19,18 +19,20 @@ class DetailDoctor extends Component {
       this.props.match.params.id
     ) {
       let id = this.props.match.params.id;
-      let res = await getDetailÌnorDoctor(id);
+      let res = await saveDetailDoctorService(id);
       if (res && res.errCode === 0) {
         this.setState({
           detailDoctor: res.data,
         });
       }
+      console.log(("res", res));
     }
   }
 
   render() {
+    console.log("res");
     let { detailDoctor } = this.state;
-    let nameVi = `${detailDoctor.lastName} ${detailDoctor.firstName}`;
+    let nameVi = `${detailDoctor.firstName} ${detailDoctor.lastName}`;
 
     return (
       <React.Fragment>
@@ -39,7 +41,7 @@ class DetailDoctor extends Component {
           <div className="intro-doctor">
             <div className="content-left"></div>
             <div className="content-right">
-              <div className="up"></div>
+              <div className="up">{nameVi}</div>
               <div className="down">
                 {detailDoctor &&
                   detailDoctor.Markdown &&
