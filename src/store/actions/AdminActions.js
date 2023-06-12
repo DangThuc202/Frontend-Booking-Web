@@ -268,7 +268,6 @@ export const fetchAllScheduleTime = () => {
           type: actionTypes.FETCH_ALLCODE_SCHEDULE_TIME_SUCCESS,
           dataTime: res.data,
         });
-        console.log("check date time: ", res.data);
       } else {
         dispatch({
           type: actionTypes.FETCH_ALLCODE_SCHEDULE_TIME_FAILED,

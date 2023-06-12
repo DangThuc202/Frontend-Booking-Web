@@ -11,6 +11,7 @@ import {
 import { path } from "../utils";
 import Home from "../routes/Home";
 import Login from "./Auth/Login";
+import Login1 from "./Auth/Login1";
 import Header from "./Header/Header";
 import System from "../routes/System";
 
@@ -55,6 +56,10 @@ class App extends Component {
                   <Route
                     path={path.LOGIN}
                     component={userIsNotAuthenticated(Login)}
+                  />
+                  <Route
+                    path={path.LOGIN1}
+                    component={userIsNotAuthenticated(Login1)}
                   />
                   <Route
                     path={path.SYSTEM}

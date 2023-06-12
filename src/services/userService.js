@@ -4,6 +4,13 @@ const handleLoginApi = (userEmail, userPassword) => {
   return axios.post("/api/login", { email: userEmail, password: userPassword });
 };
 
+// const handleLoginApi1 = (userEmail, userPassword) => {
+//   return axios.post("/api/sign-up", {
+//     email: userEmail,
+//     password: userPassword,
+//   });
+// };
+
 const getAllUsers = (inputId) => {
   return axios.get(`/api/get-all-users?id=${inputId}`);
 };
@@ -50,8 +57,15 @@ const saveBulkScheduleDoctor = (data) => {
   return axios.post("/api/bulk-create-schedule", data);
 };
 
+const getScheduleDoctorByDate = (doctorId, date) => {
+  return axios.get(
+    `/api/get-schedule-doctor-by-date?doctorId=${doctorId}&date=${date}`
+  );
+};
+
 export {
   handleLoginApi,
+  // handleLoginApi1,
   getAllUsers,
   getAllCodeService,
   createNewUserService,
@@ -62,4 +76,5 @@ export {
   saveDetailDoctorService,
   saveBulkScheduleDoctor,
   getDetailÌnorDoctor,
+  getScheduleDoctorByDate,
 };
