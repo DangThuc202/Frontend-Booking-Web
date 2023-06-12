@@ -258,9 +258,9 @@ class UserRedux extends Component {
                 <input
                   className="form-control"
                   type="text"
-                  value={lastName}
+                  value={firstName}
                   onChange={(event) => {
-                    this.onChangeInput(event, "lastName");
+                    this.onChangeInput(event, "firstName");
                   }}
                 />
               </div>
@@ -270,9 +270,9 @@ class UserRedux extends Component {
                 <input
                   className="form-control"
                   type="text"
-                  value={firstName}
+                  value={lastName}
                   onChange={(event) => {
-                    this.onChangeInput(event, "firstName");
+                    this.onChangeInput(event, "lastName");
                   }}
                 />
               </div>

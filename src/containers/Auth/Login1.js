@@ -4,14 +4,16 @@ import { push } from "connected-react-router";
 import * as actions from "../../store/actions";
 import "./Login.scss";
 import { FormattedMessage } from "react-intl";
-import { handleLoginApi } from "../../services/userService";
+import { createNewUserService } from "../../services/userService";
 
-class Login extends Component {
+class Login1 extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
+      email: "",
       password: "",
+      firstName: "",
+      lastName: "",
       isShowPassword: false,
       errMessage: "",
     };
@@ -19,13 +21,25 @@ class Login extends Component {
 
   handleOnChangeInput = (event) => {
     this.setState({
-      username: event.target.value,
+      email: event.target.value,
     });
   };
 
   handleOnChangePassword = (event) => {
     this.setState({
       password: event.target.value,
+    });
+  };
+
+  handleOnChangeInputFirstName = (event) => {
+    this.setState({
+      firstName: event.target.value,
+    });
+  };
+
+  handleOnChangeInputLastName = (event) => {
+    this.setState({
+      lastName: event.target.value,
     });
   };
 
@@ -36,7 +50,12 @@ class Login extends Component {
     });
 
     try {
-      let data = await handleLoginApi(this.state.username, this.state.password);
+      let data = await createNewUserService(
+        this.state.email,
+        this.state.password,
+        this.state.firstName,
+        this.state.lastName
+      );
       if (data && data.errCode !== 0) {
         console.log(data.message);
         this.setState({
@@ -76,14 +95,14 @@ class Login extends Component {
       <div className="login-background">
         <div className="login-container">
           <div className="login-content row">
-            <div className="col-12 text-login">Đăng nhập</div>
+            <div className="col-12 text-login">Đăng ký</div>
             <div className="col-12 form-group login-input">
               <label>Email</label>
               <input
                 type="text"
                 className="form-control"
                 placeholder="Nhập email của bạn"
-                value={this.state.username}
+                value={this.state.email}
                 onChange={(event) => this.handleOnChangeInput(event)}
               />
             </div>
@@ -109,6 +128,26 @@ class Login extends Component {
                 </span>
               </div>
             </div>
+            <div className="col-12 form-group login-input">
+              <label>Họ</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Nhập họ của bạn"
+                value={this.state.firstName}
+                onChange={(event) => this.handleOnChangeInputFirstName(event)}
+              />
+            </div>
+            <div className="col-12 form-group login-input mb-3">
+              <label>Tên</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Nhập tên của bạn"
+                value={this.state.lastName}
+                onChange={(event) => this.handleOnChangeInputLastName(event)}
+              />
+            </div>
             <div className="col-12" style={{ color: "red" }}>
               {this.state.errMessage}
             </div>
@@ -119,28 +158,8 @@ class Login extends Component {
                   this.handleLogin();
                 }}
               >
-                Đăng nhập
+                Đăng ký
               </button>
-            </div>
-            <div className="action">
-              <div className="col-8">
-                <a href="#" className="forgot-password">
-                  Quên mật khẩu?
-                </a>
-              </div>
-              <div className="col-12">
-                <div className="sign-up">Bạn chưa có tài khoản?</div>
-                <a href="/create-new-user" className="sign-up-link">
-                  Đăng ký ngay
-                </a>
-              </div>
-            </div>
-            <div className="col-12 text-center mt-3">
-              <span className="text-other-login">Hoặc đăng nhập với :</span>
-            </div>
-            <div className="col-12 social-login">
-              <i className="fab fa-google-plus-g google"></i>
-              <i className="fab fa-facebook-f facebook"></i>
             </div>
           </div>
         </div>
@@ -163,4 +182,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login1);

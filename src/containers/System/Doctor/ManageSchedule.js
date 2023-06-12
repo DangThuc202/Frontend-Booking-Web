@@ -109,7 +109,6 @@ class ManageSchedule extends Component {
 
   render() {
     let { rangeTime } = this.state;
-    console.log("rangetime", rangeTime);
     return (
       <div className="manage-schedule-container">
         <div className="m-s-title">
