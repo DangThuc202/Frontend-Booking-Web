@@ -194,7 +194,6 @@ class UserRedux extends Component {
   };
 
   render() {
-    console.log("thuc3", this.state);
     let isSetGenders = this.state.isLoadingGender;
     let genders = this.state.genderArr;
     let roles = this.state.roleArr;
@@ -218,7 +217,6 @@ class UserRedux extends Component {
         <div className="user-redux-body">
           <div className="container">
             <div className="row">
-              <div className="col-12">Thêm mới người dùng</div>
               <div className="col-12">
                 {isSetGenders === true ? "Loading" : ""}
               </div>
@@ -289,7 +287,7 @@ class UserRedux extends Component {
                 />
               </div>
 
-              <div className="col-9">
+              <div className="col-3">
                 <label>Địa Chỉ</label>
                 <input
                   className="form-control"
@@ -299,6 +297,28 @@ class UserRedux extends Component {
                     this.onChangeInput(event, "address");
                   }}
                 />
+              </div>
+
+              <div className="col-3">
+                <label>Hình Ảnh</label>
+                <div className="preview-img-container">
+                  <div
+                    className="preview-image "
+                    style={{
+                      backgroundImage: `url(${this.state.previewImgURL})`,
+                    }}
+                    onClick={() => this.openPreviewImage()}
+                  ></div>
+                  <input
+                    id="previewImg"
+                    type="file"
+                    hidden
+                    onChange={(event) => this.handleOnchangeImage(event)}
+                  />
+                  <label className="label-upload" htmlFor="previewImg">
+                    Tải ảnh <i className="fas fa-upload"></i>
+                  </label>
+                </div>
               </div>
 
               <div className="col-12 my-3">

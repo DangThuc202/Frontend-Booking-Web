@@ -20,7 +20,6 @@ const adminReducer = (state = initialState, action) => {
       };
     case actionTypes.FETCH_GENDER_SUCCESS:
       state.genders = action.data;
-      console.log("check", action.data);
       state.isLoadingGender = false;
       return {
         ...state,
