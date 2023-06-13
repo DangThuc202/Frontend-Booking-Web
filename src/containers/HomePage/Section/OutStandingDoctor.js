@@ -33,7 +33,6 @@ class OutstandingDoctor extends Component {
   };
 
   render() {
-    console.log("check", this.props.topDoctorsRedux);
     let arrDoctors = this.state.arrDoctors;
     arrDoctors = arrDoctors.concat(arrDoctors).concat(arrDoctors);
     return (
@@ -48,6 +47,12 @@ class OutstandingDoctor extends Component {
               {arrDoctors &&
                 arrDoctors.length > 0 &&
                 arrDoctors.map((item, index) => {
+                  let imageBase64 = "";
+                  if (item.image) {
+                    imageBase64 = new Buffer(item.image, "base64").toString(
+                      "binary"
+                    );
+                  }
                   let nameVi = `${item.firstName} ${item.lastName}`;
                   return (
                     <div
@@ -59,7 +64,7 @@ class OutstandingDoctor extends Component {
                         <div className="outer-bg">
                           <div
                             className="bg-img section-outstanding-doctor"
-                            // style={{ backgroundImage: `url(${imageBase64})` }}
+                            style={{ backgroundImage: `url(${imageBase64})` }}
                           ></div>
                         </div>
                         <div className="position text-center">
