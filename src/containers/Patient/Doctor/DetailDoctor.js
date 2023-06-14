@@ -39,7 +39,12 @@ class DetailDoctor extends Component {
         <HomeHeader isShowBanner={false} />
         <div className="doctor-detail-container">
           <div className="intro-doctor">
-            <div className="content-left"></div>
+            <div
+              className="content-left"
+              style={{
+                backgroundImage: `url(${detailDoctor.image})`,
+              }}
+            ></div>
             <div className="content-right">
               <div className="up">{nameVi}</div>
               <div className="down">
@@ -61,7 +66,7 @@ class DetailDoctor extends Component {
             </div>
             <div className="content-right"></div>
           </div>
-          <div className="detail--infor-doctor">
+          <div className="detail-infor-doctor">
             {detailDoctor &&
               detailDoctor.Markdown &&
               detailDoctor.Markdown.contentHTML && (

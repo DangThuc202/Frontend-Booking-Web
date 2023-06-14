@@ -4,13 +4,6 @@ const handleLoginApi = (userEmail, userPassword) => {
   return axios.post("/api/login", { email: userEmail, password: userPassword });
 };
 
-// const handleLoginApi1 = (userEmail, userPassword) => {
-//   return axios.post("/api/sign-up", {
-//     email: userEmail,
-//     password: userPassword,
-//   });
-// };
-
 const getAllUsers = (inputId) => {
   return axios.get(`/api/get-all-users?id=${inputId}`);
 };
@@ -65,7 +58,6 @@ const getScheduleDoctorByDate = (doctorId, date) => {
 
 export {
   handleLoginApi,
-  // handleLoginApi1,
   getAllUsers,
   getAllCodeService,
   createNewUserService,

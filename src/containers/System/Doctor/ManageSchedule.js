@@ -95,6 +95,7 @@ class ManageSchedule extends Component {
           object.timeType = schedule.keyMap;
           result.push(object);
         });
+        alert("Tạo lịch thành công !");
       } else {
         return;
       }
@@ -109,6 +110,7 @@ class ManageSchedule extends Component {
 
   render() {
     let { rangeTime } = this.state;
+    console.log(this.state);
     return (
       <div className="manage-schedule-container">
         <div className="m-s-title">
@@ -147,7 +149,7 @@ class ManageSchedule extends Component {
                       key={index}
                       onClick={() => this.handleClickBtnTime(item)}
                     >
-                      {item.valueEn}
+                      {item.valueVi}
                     </button>
                   );
                 })}
